@@ -1,0 +1,21 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.form-control{
+  margin: 5px;
+}
+
+p.pass{
+  margin: 2px;
+  padding: 0;
+  font-size: 12px;  
+}
+button {
+  margin: 2px;
+}

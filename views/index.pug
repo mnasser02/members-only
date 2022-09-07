@@ -1,0 +1,42 @@
+extends layout
+
+block content
+	h1= title
+	if locals.currentUser
+		h2 Welcome, #{locals.currentUser.first_name}
+		hr
+		a(href="/create") Create new message 
+		br
+		a(href="/join") Join the club!
+		form(action='/create/'+locals.currentUser._id method="POST")
+		if join
+			form(action="/join/"+locals.currentUser._id method="POST")
+				input(type="password" name="join_pass")
+				button(type="submit") Join
+		each msg in msgs
+			if locals.member
+				h3= msg.user.full_name 
+			h4= msg.title 
+			p= msg.content
+			if locals.currentUser.admin 
+				a(href="/delete/"+msg._id) delete 
+		else
+			p No messages yet
+		br
+		button
+			a(href="/log-out") Log Out 
+	else
+		p Welcome to #{title}!
+		form(action="/log-in" method="POST")
+			.form-control
+				label(for="email") Email: 
+				br
+				input#last_name(type="email" name="username" required)
+				.form-control
+				label(for="password") Password:
+				br
+				input#password(type="password" name="password" required)
+			button(type="submit") Log In
+		p Don't have an account? 			
+		button
+			a(href="/sign-up") Sign Up 

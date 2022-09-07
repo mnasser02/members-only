@@ -1,0 +1,10 @@
+extends layout 
+
+
+block content 
+    form(action='/create/'+locals.currentUser._id method="POST")
+        label(for="title") Title: 
+        input#title(type="text" name="title" required)
+        label(for="content") Content:  
+        input#content(type="textarea" name="content" required)
+        button(type="submit") Submit
