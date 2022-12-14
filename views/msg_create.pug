@@ -2,9 +2,14 @@ extends layout
 
 
 block content 
-    form(action='/create/'+locals.currentUser._id method="POST")
-        label(for="title") Title: 
-        input#title(type="text" name="title" required)
-        label(for="content") Content:  
-        input#content(type="textarea" name="content" required)
-        button(type="submit") Submit
+    .form
+        form(action='/create/'+locals.currentUser._id method="POST")
+            .input-container.ic1
+                input#title.input(type="text" name="title" placeholder=" " required)
+                .cut
+                label.placeholder(for="title") Title
+            .input-container.ic2
+                input#content.input(type="textarea" name="content" placeholder=" " required)
+                .cut
+                label.placeholder(for="content") Content  
+            button.submit(type="submit") Submit

@@ -1,42 +1,46 @@
 extends layout
 
 block content
-	h1= title
+	//- h1= title
 	if locals.currentUser
 		h2 Welcome, #{locals.currentUser.first_name}
 		hr
-		a(href="/create") Create new message 
+		a.edit(href="/create") ㊉ Message
 		br
-		a(href="/join") Join the club!
-		form(action='/create/'+locals.currentUser._id method="POST")
-		if join
-			form(action="/join/"+locals.currentUser._id method="POST")
-				input(type="password" name="join_pass")
-				button(type="submit") Join
+		if !locals.member
+			a.edit.join(href="/join") Join the club!
+			form(action='/create/'+locals.currentUser._id method="POST")
+			if join
+				form.cform(action="/join/"+locals.currentUser._id method="POST")
+					input(type="password" name="join_pass")
+					button.submit(type="submit") Join
 		each msg in msgs
-			if locals.member
-				h3= msg.user.full_name 
-			h4= msg.title 
-			p= msg.content
-			if locals.currentUser.admin 
-				a(href="/delete/"+msg._id) delete 
+			.msg
+				if locals.member
+					h4= msg.user.full_name 
+				h3= msg.title 
+				p= msg.content
+				if locals.currentUser.admin 
+					a.edit(href="/delete/"+msg._id) delete 
 		else
 			p No messages yet
 		br
-		button
-			a(href="/log-out") Log Out 
+		a(href="/log-out") 
+			button.submit.logout Log Out 
 	else
-		p Welcome to #{title}!
-		form(action="/log-in" method="POST")
-			.form-control
-				label(for="email") Email: 
-				br
-				input#last_name(type="email" name="username" required)
-				.form-control
-				label(for="password") Password:
-				br
-				input#password(type="password" name="password" required)
-			button(type="submit") Log In
-		p Don't have an account? 			
-		button
-			a(href="/sign-up") Sign Up 
+		.form
+			form(action="/log-in" method="POST")
+				p.title Welcome to #{title}!
+				.input-container.ic1
+					input#last_name.input(type="email" name="username" placeholder=" " required)
+					.cut
+					label.placeholder(for="email") Email
+				.input-container.ic2
+					input#password.input(type="password" name="password" placeholder=" " required)
+					.cut
+					label.placeholder(for="password") Password
+				button.submit(type="submit") Log In
+			a(href="/sign-up")
+				button.submit Sign Up 
+					
+		

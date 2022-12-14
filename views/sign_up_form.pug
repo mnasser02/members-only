@@ -2,35 +2,36 @@ extends layout
 
 
 block content
-    h1= title
-    form(action="" method="POST")
-        .form-control
-            label(for="first_name") First Name:
-            br
-            input#first_name(type="text" name="first_name" required value=(undefined===user ? '': user.first_name))
-        .form-control
-            label(for="last_name") Family Name: 
-            br
-            input#last_name(type="text" name="last_name" required)
-        .form-control
-            label(for="password") Password:
-            p.pass Must have at least 8 characters
-            input#password(type="password" name="password" required)
-        .form-control
-            label(for="confirm-pass") Confirm Password:
-            br 
-            input#confirm-pass(type="password" name="confirm-pass" required)
-        .form-control
-            label(for="email") Email:
-            br 
-            input#email(type="email" name="email" required)
-        .form-control
-            label(for="admin") Admin password (not required):
-            br 
-            input#email(type="password" name="admin_pass")
-        button(type="reset") Reset
-        button(type="submit") Submit
-        if errors
-            ul
-            each error in errors
-                li= error.msg
+    .form
+        h1.title= title
+        form(action="" method="POST")
+            .input-container.ic1
+                input#first_name.input(type="text" name="first_name" placeholder=" " required value=(undefined===user ? '': user.first_name))
+                .cut
+                label.placeholder(for="first_name" laceholder=" ") First Name   
+            .input-container.ic2
+                input#last_name.input(type="text" name="last_name" placeholder=" " required)   
+                .cut
+                label.placeholder(for="last_name") Family Name
+            .input-container.ic2
+                input#password.input(type="password" name="password" placeholder=" " required)
+                .cut 
+                label.placeholder(for="password") Password
+            .input-container.ic2
+                input#confirm-pass.input(type="password" name="confirm-pass" placeholder=" " required)
+                .cut 
+                label.placeholder(for="confirm-pass") Confirm Password
+            .input-container.ic2
+                input#email.input(type="email" name="email" placeholder=" " required)
+                .cut
+                label.placeholder(for="email") Email               
+            .input-container.ic2
+                input#email.input(type="password" name="admin_pass"  placeholder=" ")
+                .cut 
+                label.placeholder(for="admin") Admin password
+            button.submit(type="reset") Reset
+            button.submit(type="submit") Submit
+            if errors
+                ul
+                each error in errors
+                    li= error.msg
